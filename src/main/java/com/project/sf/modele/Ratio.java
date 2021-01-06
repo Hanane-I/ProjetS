@@ -1,6 +1,8 @@
 package com.project.sf.modele;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,15 +27,18 @@ public class Ratio {
 	@ManyToOne
 	@MapsId("activiteId")
 	@JoinColumn(name = "activite_id")
-	@JsonIgnore
+	@JsonProperty
 	private Activite activite;
+
+	private int ordreAffichage;
 	
 	@ManyToOne
 	@MapsId("deliveryId")
 	@JoinColumn(name = "delivery_id")
+	@JsonProperty
 	private Delivery delivery;
 
-	private long pourcentage;
+	private double pourcentage;
 
 	public RatioId getId() {
 		return id;
@@ -43,6 +48,8 @@ public class Ratio {
 		this.id = id;
 	}
 
+
+	@JsonIgnore //@JsonBackReference //
 	public Activite getActivite() {
 		return activite;
 	}
@@ -51,6 +58,7 @@ public class Ratio {
 		this.activite = activite;
 	}
 
+	 @JsonIgnore //@JsonBackReference //
 	public Delivery getDelivery() {
 		return delivery;
 	}
@@ -59,11 +67,19 @@ public class Ratio {
 		this.delivery = delivery;
 	}
 
-	public long getPourcentage() {
+	public double getPourcentage() {
 		return pourcentage;
 	}
 
-	public void setPourcentage(long pourcentage) {
+	public void setPourcentage(double pourcentage) {
 		this.pourcentage = pourcentage;
+	}
+
+	public int getOrdreAffichage() {
+		return ordreAffichage;
+	}
+
+	public void setOrdreAffichage(int ordreAffichage) {
+		this.ordreAffichage = ordreAffichage;
 	}
 }

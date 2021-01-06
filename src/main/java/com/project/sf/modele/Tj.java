@@ -1,11 +1,12 @@
 package com.project.sf.modele;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.*;
 
 @Entity
 public class Tj implements Serializable {
@@ -15,10 +16,14 @@ public class Tj implements Serializable {
 	
 	@ManyToOne
 	@MapsId("clientId")
+	@JoinColumn(name = "client_id")
+	@JsonIgnore
 	private Client client;
 	
 	@ManyToOne
 	@MapsId("profilId")
+	@JoinColumn(name = "profil_id")
+	@JsonProperty
 	private Profil profil;
 	
 	private double cout;
@@ -40,6 +45,7 @@ public class Tj implements Serializable {
 		this.client = client;
 	}
 
+	@JsonIgnore
 	public Profil getProfil() {
 		return profil;
 	}

@@ -4,49 +4,54 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import com.project.sf.services.DomaineService;
+import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.project.sf.modele.Domaine;
 import com.project.sf.repository.DomaineRepository;
 
 @RestController
+@RequestMapping("/api/domaine")
 public class DomaineController {
 	
-	@Autowired
-	private DomaineRepository domaineRepository; 
+	@Autowired private DomaineRepository domaineRepository;
+	@Autowired private DomaineService domaineService;
 
-	@GetMapping("/domaines")
+	@GetMapping
 	public List<Domaine> retrieveAllDomaines() {
 		return domaineRepository.findAll();
 	}
 	
-	@GetMapping("/domaines/{id}")
+	@GetMapping("/{id}")
 	public Domaine retrieveDomaine(@PathVariable long id) {
 		Optional<Domaine> activite = domaineRepository.findById(id);
 		return activite.get();
 	}
 	
-	@PostMapping("/domaines")
+	@PostMapping
 	public ResponseEntity<Object> createDomaine(@RequestBody Domaine domaine) {
-		Domaine savedDomaine = domaineRepository.save(domaine);
+		Domaine savedDomaine = domaineService.save(domaine);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(savedDomaine.getId()).toUri();
+				.buildAndExpand(savedDomaine.getDomaineId()).toUri();
 
 		return ResponseEntity.created(location).build();
 	}
 	
 	
-	@DeleteMapping("/domaines/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteDomaine(@PathVariable long id) {
 		domaineRepository.deleteById(id);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<?> putDomaine(@RequestBody Domaine newDomaine, @PathVariable Long id){
+		Domaine domaine = domaineService.update(newDomaine, id);
+		return new ResponseEntity<>(domaineRepository.save(domaine), HttpStatus.ACCEPTED);
 	}
 }

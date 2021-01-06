@@ -8,4 +8,5 @@ import com.project.sf.modele.Domaine;
 @Repository
 public interface DomaineRepository extends JpaRepository<Domaine, Long>{
 
+    public Domaine findDomaineByDomaineId(Long id);
 }

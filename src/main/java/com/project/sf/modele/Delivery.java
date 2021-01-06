@@ -3,31 +3,33 @@ package com.project.sf.modele;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Delivery {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long deliveryId;
-	private double charge;
-	private long idClient;
-	
-	@OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private Collection<Ratio> ratio = new ArrayList<Ratio>() ;
-	
+	private String nom;
+	private String libelle;
 
+	@ManyToOne
+	@JoinColumn(name = "projet_id")
+	private Projet projet;
+
+	@OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
+	private Collection<Ratio> ratio = new ArrayList<Ratio>() ;
+
+	//@JsonManagedReference //@JsonIgnore
 	public Collection<Ratio> getRatio() {
 		return ratio;
 	}
@@ -44,21 +46,28 @@ public class Delivery {
 		this.deliveryId = deliveryId;
 	}
 
-	public double getCharge() {
-		return charge;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setCharge(double charge) {
-		this.charge = charge;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
-	public long getIdClient() {
-		return idClient;
+	public String getLibelle() {
+		return libelle;
 	}
 
-	public void setIdClient(long idClient) {
-		this.idClient = idClient;
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
 	}
-	
-	
+
+	@JsonIgnore
+	public Projet getProjet() {
+		return projet;
+	}
+
+	public void setProjet(Projet projet) {
+		this.projet = projet;
+	}
 }

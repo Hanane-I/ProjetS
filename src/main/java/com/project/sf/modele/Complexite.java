@@ -11,11 +11,14 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import java.io.Serializable;
+
 
 @Entity
-public class Complexite {
+public class Complexite implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long complexiteId;
+	private String nom;
 	private String libelle;
 	private double valeur;
 	
@@ -39,15 +42,22 @@ public class Complexite {
 		this.valeur = valeur;
 	}
 
-	public long getId() {
-		return id;
+	public long getComplexiteId() {
+		return complexiteId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setComplexiteId(long complexiteId) {
+		this.complexiteId = complexiteId;
 	}
 
-	@JsonBackReference
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
 	public Domaine getDomaine() {
 		return domaine;
 	}

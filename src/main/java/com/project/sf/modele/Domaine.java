@@ -1,5 +1,6 @@
 package com.project.sf.modele;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,27 +18,27 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
-public class Domaine {
+public class Domaine implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long domaineId;
+	private String nom;
 	private String libelle;
 	
 	@ManyToOne
 	@JoinColumn(name = "categorie_id")
 	private Categorie categorie;
 	
-	@OneToMany(mappedBy = "domaine", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "domaine", cascade = CascadeType.ALL)
 	private Set<Complexite> complexites;
-	
-	
-	public long getId() {
-		return id;
+
+	public long getDomaineId() {
+		return domaineId;
 	}
-	
-	public void setId(long id) {
-		this.id = id;
+
+	public void setDomaineId(long domaineId) {
+		this.domaineId = domaineId;
 	}
-	
+
 	public String getLibelle() {
 		return libelle;
 	}
@@ -45,17 +46,22 @@ public class Domaine {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	
-	@JsonBackReference
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
 	public Categorie getCategorie() {
 		return categorie;
 	}
-
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
 	
-	@JsonManagedReference
 	public Set<Complexite> getComplexites() {
 		return complexites;
 	}

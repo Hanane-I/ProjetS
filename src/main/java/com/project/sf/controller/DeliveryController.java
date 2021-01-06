@@ -13,21 +13,25 @@ import com.project.sf.services.DeliveryService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/delivery")
+@RequestMapping("/api/delivery")
 public class DeliveryController {
 	
-	@Autowired
-	private DeliveryRepository deliveryRepository;
+	@Autowired private DeliveryRepository deliveryRepository;
+	@Autowired private DeliveryService deliveryService;
 
 	@GetMapping
 	public List<Delivery> retrieveAllDelivery() {
 		return deliveryRepository.findAll();
 	}
 
+	@GetMapping("/{id}")
+	public Delivery getDelivery(@PathVariable Long id){
+		return deliveryRepository.findByDeliveryId(id);
+	}
 
 	@PostMapping
 	public Delivery createDelivery(@RequestBody Delivery delivery) {
-		return deliveryRepository.save(delivery);
+		return deliveryService.save(delivery);
 	}
 
 	@DeleteMapping("/{id}")
@@ -37,15 +41,6 @@ public class DeliveryController {
 
 	@PutMapping("/{id}")
 	public Delivery updateDelivery(@RequestBody Delivery newDelivery, @PathVariable Long id){
-		return deliveryRepository.findById(id)
-				.map(delivery -> {
-					delivery.setCharge(newDelivery.getCharge());
-					delivery.setIdClient(newDelivery.getIdClient());
-					return deliveryRepository.save(delivery);
-				})
-				.orElseGet(() -> {
-					newDelivery.setDeliveryId(id);
-					return deliveryRepository.save(newDelivery);
-				});
+		return deliveryService.update(newDelivery, id);
 	}
 }

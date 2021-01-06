@@ -17,4 +17,5 @@ public interface RatioRepository extends JpaRepository<Ratio, Long> {
 
     public List<Ratio> findRatioByActivite_ActiviteId(Long idA);
     public List<Ratio> findRatioByDelivery_DeliveryId(Long idD);
+    public void deleteRatioByActivite_ActiviteId(Long id);
 }

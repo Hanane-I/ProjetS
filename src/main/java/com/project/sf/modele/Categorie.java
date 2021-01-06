@@ -1,15 +1,14 @@
 package com.project.sf.modele;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -19,16 +18,27 @@ import lombok.ToString;
 
 @Entity 
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
-public class Categorie {
+public class Categorie implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
+	private long categorieId;
+	private String nom;
 	private String libelle;
 	
-	//@OneToMany(fetch = FetchType.EAGER, mappedBy = "categorie")
-	@OneToMany( mappedBy = "categorie", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<Domaine> domaines;
-	
+	@OneToMany( mappedBy = "categorie", cascade = CascadeType.ALL)
+	private Collection<Domaine> domaines = new ArrayList<Domaine>();
+
+	@ManyToOne
+	@JoinColumn(name = "projet_id")
+	private Projet projet;
+
+	public long getCategorieId() {
+		return categorieId;
+	}
+
+	public void setCategorieId(long categorieId) {
+		this.categorieId = categorieId;
+	}
+
 	public String getLibelle() {
 		return libelle;
 	}
@@ -36,13 +46,28 @@ public class Categorie {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	
-	@JsonManagedReference
-	public Set<Domaine> getDomaines() {
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public Projet getProjet() {
+		return projet;
+	}
+
+	public void setProjet(Projet projet) {
+		this.projet = projet;
+	}
+
+	public Collection<Domaine> getDomaines() {
 		return domaines;
 	}
-	
-	public void setDomaines(Set<Domaine> domaines) {
+
+	public void setDomaines(Collection<Domaine> domaines) {
 		this.domaines = domaines;
 	}
 }

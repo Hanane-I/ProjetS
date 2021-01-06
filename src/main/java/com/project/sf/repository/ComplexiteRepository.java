@@ -8,4 +8,6 @@ import com.project.sf.modele.Complexite;
 @Repository
 public interface ComplexiteRepository extends JpaRepository<Complexite, Long> {
 
+    public Complexite findComplexiteByComplexiteId(Long id);
+
 }

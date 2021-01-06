@@ -4,49 +4,51 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import com.project.sf.services.ProjetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.project.sf.modele.Projet;
 import com.project.sf.repository.ProjetRepository;
 
 @RestController
+@RequestMapping("/api/projet")
 public class ProjetController {
 
-	@Autowired 
-	private ProjetRepository projetRepository;
+	@Autowired private ProjetRepository projetRepository;
+	@Autowired private ProjetService projetService;
 	
-	@GetMapping("/projets")
+	@GetMapping
 	public List<Projet> retrieveAllProjets() {
 		return projetRepository.findAll();
 	}
 	
-	@GetMapping("/projets/{id}")
+	@GetMapping("/{id}")
 	public Projet retrieveProjet(@PathVariable long id) {
-		Optional<Projet> projet = projetRepository.findById(id);
-		return projet.get();
+		return projetRepository.findProjetByProjetId(id);
 	}
 	
-	@PostMapping("/projets")
+	@PostMapping
 	public ResponseEntity<Object> createProjet(@RequestBody Projet projet) {
-		Projet savedProjet = projetRepository.save(projet);
+		Projet savedProjet = projetService.save(projet);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(savedProjet.getId()).toUri();
+				.buildAndExpand(savedProjet.getProjetId()).toUri();
 
 		return ResponseEntity.created(location).build();
 	}
 	
 	
-	@DeleteMapping("/projets/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteProjet(@PathVariable long id) {
 		projetRepository.deleteById(id);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateProjet(@RequestBody Projet newProjet, @PathVariable Long id){
+		Projet projet = projetService.update(newProjet, id);
+		return ResponseEntity.ok(projet);
 	}
 }

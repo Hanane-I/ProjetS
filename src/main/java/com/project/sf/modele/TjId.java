@@ -1,6 +1,7 @@
 package com.project.sf.modele;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Embeddable;
 
@@ -9,14 +10,6 @@ public class TjId implements Serializable {
 
 	private long clientId;
 	private long profilId;
-	
-	
-	public TjId() {}
-
-	public TjId(long clientId, long profilId) {
-		this.clientId = clientId;
-		this.profilId = profilId;
-	}
 	
 	public long getClientId() {
 		return clientId;
@@ -33,11 +26,7 @@ public class TjId implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (clientId ^ (clientId >>> 32));
-		result = prime * result + (int) (profilId ^ (profilId >>> 32));
-		return result;
+		return Objects.hash(clientId, profilId);
 	}
 
 	@Override

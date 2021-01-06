@@ -7,6 +7,6 @@ import com.project.sf.modele.Projet;
 
 @Repository
 public interface ProjetRepository extends JpaRepository<Projet, Long>{
-
+    public Projet findProjetByProjetId(Long id);
 	
 }

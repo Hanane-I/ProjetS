@@ -8,4 +8,5 @@ import com.project.sf.modele.Categorie;
 @Repository
 public interface CategorieRepository extends JpaRepository<Categorie, Long> {
 
+    public Categorie findCategorieByCategorieId(Long id);
 }

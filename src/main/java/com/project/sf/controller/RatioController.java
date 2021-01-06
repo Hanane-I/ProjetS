@@ -60,10 +60,4 @@ public class RatioController {
             deliveryRepository.deleteDeliveryByDeliveryId(idD);
         ratioRepository.deleteRatioByActivite_ActiviteIdAndDelivery_DeliveryId(idA, idD);
     }
-
-   /* @PutMapping
-    public Ratio updateRatio(@RequestBody Ratio ratio, @Param("idA") Long idA, @Param("idD") Long idD){
-        Ratio r = ratioService.update(ratio,idA, idD);
-        return ratioRepository.save(r);
-    }*/
 }

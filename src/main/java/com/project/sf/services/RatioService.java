@@ -28,19 +28,9 @@ public class RatioService {
     public List<Ratio> findRatioByActiviteId(Long activiteId){
         return ratioRepository.findByIdActiviteId(activiteId);
     }
+    public void delete(Long id, Long idD){ratioRepository.deleteRatioByActivite_ActiviteIdAndDelivery_DeliveryId(id, idD);
+    System.out.println("RS");
+    }
 
-    /*public Ratio update(Ratio ratio,Long idA, Long idD){
-        Activite activite = activiteRepository.findByActiviteId(ratio.getId().getActiviteId());
-        Delivery delivery = deliveryRepository.findByDeliveryId(ratio.getDelivery().getDeliveryId());
-        Ratio newRatio = ratioRepository.findRatioByActivite_ActiviteIdAndDelivery_DeliveryId(idA, idD);
-        RatioId id = new RatioId();
-        id.setActiviteId(activite.getActiviteId());
-        id.setDeliveryId(delivery.getDeliveryId());
-        newRatio.setId(id);
-        newRatio.setActivite(activite);
-        newRatio.setDelivery(delivery);
-        newRatio.setPourcentage(ratio.getPourcentage());
-        return newRatio;
-    }*/
 
 }
