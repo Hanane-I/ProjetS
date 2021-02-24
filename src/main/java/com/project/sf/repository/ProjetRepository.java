@@ -5,8 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import com.project.sf.modele.Projet;
 
+import java.util.List;
+
 @Repository
 public interface ProjetRepository extends JpaRepository<Projet, Long>{
     public Projet findProjetByProjetId(Long id);
+    public List<Projet> findAllByClient_ClientId(Long id);
 	
 }

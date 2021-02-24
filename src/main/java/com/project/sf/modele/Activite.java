@@ -1,18 +1,14 @@
 package com.project.sf.modele;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Activite  {
@@ -23,7 +19,7 @@ public class Activite  {
 	private String idLong;
 	
 	@OneToMany(mappedBy = "activite", cascade = CascadeType.ALL)
-	private Collection<Ratio> ratio = new ArrayList<Ratio>();
+	private Collection<Ratio> ratio;
 
 	public long getActiviteId() {
 		return activiteId;
@@ -49,7 +45,6 @@ public class Activite  {
 	public void setIdLong(String idLong) {
 		this.idLong = idLong;
 	}
-	//@JsonManagedReference //@JsonIgnore
 	public Collection<Ratio> getRatio() {
 		return ratio;
 	}

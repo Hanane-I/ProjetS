@@ -43,4 +43,9 @@ public class DeliveryController {
 	public Delivery updateDelivery(@RequestBody Delivery newDelivery, @PathVariable Long id){
 		return deliveryService.update(newDelivery, id);
 	}
+
+	@GetMapping("/projet/{id}")
+	public List<Delivery> getDeliveryByProjectId(@PathVariable Long id){
+		return deliveryRepository.findAllByProjet_ProjetId(id);
+	}
 }

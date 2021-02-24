@@ -1,11 +1,10 @@
 package com.project.sf.services;
 
-import com.project.sf.modele.Activite;
-import com.project.sf.modele.Ratio;
+import com.project.sf.modele.*;
+import com.project.sf.repository.ProfilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.sf.modele.Delivery;
 import com.project.sf.repository.DeliveryRepository;
 
 import java.util.stream.Collectors;
@@ -13,13 +12,10 @@ import java.util.stream.Collectors;
 @Service
 public class DeliveryService {
 
-	@Autowired
-	private DeliveryRepository deliveryRepository;
+	@Autowired private DeliveryRepository deliveryRepository;
 	@Autowired private ActiviteService activiteService;
+	@Autowired private ProfilService profilService;
 
-	public Delivery findDeliveryById(Long deliveryId){
-		return deliveryRepository.findByDeliveryId(deliveryId);
-	}
 
 	public Delivery save(Delivery delivery){
 		Delivery newDelivery = new Delivery();
@@ -36,6 +32,8 @@ public class DeliveryService {
 			return newRatio;
 		}).collect(Collectors.toList())
 		));
+
+		newDelivery.setTj(delivery.getTj());
 		return  deliveryRepository.save(newDelivery);
 	}
 
@@ -54,8 +52,14 @@ public class DeliveryService {
 			return newRatio;
 		}).collect(Collectors.toList())
 		));
+
+		newDelivery.setTj(delivery.getTj());
+
+
 		return deliveryRepository.save(newDelivery);
 	}
+
+
 
 
 	

@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import lombok.ToString;
 
 @Entity 
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","domaines"})
 public class Categorie implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long categorieId;

@@ -26,9 +26,13 @@ public class ProjetController {
 	}
 	
 	@GetMapping("/{id}")
-	public Projet retrieveProjet(@PathVariable long id) {
+	public Projet getProjet(@PathVariable long id) {
 		return projetRepository.findProjetByProjetId(id);
 	}
+
+	@GetMapping("/client/{id}")
+	public List<Projet> getAllProjetByClient(@PathVariable long id){return projetRepository.findAllByClient_ClientId(id);}
+
 	
 	@PostMapping
 	public ResponseEntity<Object> createProjet(@RequestBody Projet projet) {

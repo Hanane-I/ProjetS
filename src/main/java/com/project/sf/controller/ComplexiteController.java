@@ -15,6 +15,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/complexite")
 public class ComplexiteController {
+
     @Autowired private ComplexiteRepository complexiteRepository;
     @Autowired private ComplexiteService complexiteService;
 
@@ -27,6 +28,11 @@ public class ComplexiteController {
     public Complexite getComplexite(@PathVariable Long id){
         Optional<Complexite> complexite =  complexiteRepository.findById(id);
         return complexite.get();
+    }
+
+    @GetMapping("/domaine/{id}")
+    public List<Complexite> getComplexiteByDomaine(@PathVariable Long id){
+        return complexiteRepository.findAllByDomaine_DomaineId(id);
     }
 
     @PostMapping

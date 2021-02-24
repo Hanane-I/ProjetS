@@ -24,6 +24,4 @@ public class TestDomaine {
         when(domaineController.retrieveAllDomaines()).thenReturn(Stream
         .of(new Domaine(), new Domaine()).collect(Collectors.toList()));
     }
-
-
 }

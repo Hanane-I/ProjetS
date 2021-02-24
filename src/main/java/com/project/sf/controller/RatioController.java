@@ -1,41 +1,30 @@
+
+
 package com.project.sf.controller;
 
-import com.project.sf.modele.Activite;
-import com.project.sf.modele.Delivery;
+
 import com.project.sf.modele.Ratio;
-import com.project.sf.modele.RatioId;
 import com.project.sf.repository.ActiviteRepository;
 import com.project.sf.repository.DeliveryRepository;
 import com.project.sf.repository.RatioRepository;
 import com.project.sf.services.ActiviteService;
 import com.project.sf.services.RatioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/api/ratio")
 public class RatioController {
 
-    @Autowired
-    private RatioService ratioService;
-
-    @Autowired
-    private RatioRepository ratioRepository;
-
-    @Autowired
-    private ActiviteService activiteService;
-
-    @Autowired
-    private ActiviteRepository activiteRepository;
+    @Autowired private RatioService ratioService;
+    @Autowired private RatioRepository ratioRepository;
+    @Autowired private ActiviteRepository activiteRepository;
     @Autowired private DeliveryRepository deliveryRepository;
 
     @GetMapping
@@ -47,6 +36,13 @@ public class RatioController {
     public List<Ratio> getRatio(@PathVariable Long id){
         return ratioService.findRatioByActiviteId(id);
     }
+
+    @GetMapping("/activite/{id}")
+    public List<Ratio> getRatioByActiviteId(@PathVariable Long id){ return ratioRepository.findRatioByActivite_ActiviteId(id);}
+
+    @GetMapping("/delivery/{id}")
+    public List<Ratio> getRatioByDeliveryId(@PathVariable Long id){ return ratioRepository.findRatioByDelivery_DeliveryId(id);}
+
 
     @DeleteMapping
     @Transactional

@@ -8,15 +8,17 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TjId implements Serializable {
 
-	private long clientId;
+	private long deliveryId;
 	private long profilId;
-	
-	public long getClientId() {
-		return clientId;
+
+	public long getProjetId() {
+		return deliveryId;
 	}
-	public void setClientId(long clientId) {
-		this.clientId = clientId;
+
+	public void setProjetId(long projetId) {
+		this.deliveryId = projetId;
 	}
+
 	public long getProfilId() {
 		return profilId;
 	}
@@ -25,27 +27,16 @@ public class TjId implements Serializable {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(clientId, profilId);
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof TjId)) return false;
+		TjId tjId = (TjId) o;
+		return deliveryId == tjId.deliveryId &&
+				getProfilId() == tjId.getProfilId();
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		TjId other = (TjId) obj;
-		if (clientId != other.clientId)
-			return false;
-		if (profilId != other.profilId)
-			return false;
-		return true;
+	public int hashCode() {
+		return Objects.hash(deliveryId, getProfilId());
 	}
-	
-	
-	
-	
 }

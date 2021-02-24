@@ -1,5 +1,6 @@
 package com.project.sf.modele;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","projets"})
 public class Client implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long clientId;
@@ -25,8 +27,7 @@ public class Client implements Serializable {
 	private String adresse;
 	private String telephone;
 	
-	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-	private Collection<Tj> tj = new ArrayList<Tj>();
+
 
 	@OneToMany( mappedBy = "client", cascade = CascadeType.ALL)
 	private Collection<Projet> projets = new ArrayList<Projet>();
@@ -39,13 +40,8 @@ public class Client implements Serializable {
 		this.clientId = clientId;
 	}
 
-	public Collection<Tj> getTj() {
-		return tj;
-	}
 
-	public void setTj(Collection<Tj> tj) {
-		this.tj = tj;
-	}
+
 
 	public String getNom() {
 		return nom;

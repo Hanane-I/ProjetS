@@ -29,6 +29,11 @@ public class TjController {
 		Optional<Tj> tj = tjRepository.findById(id);
 		return tj.get();
 	}
+
+	@GetMapping("/delivery/{id}")
+	public List<Tj> getAllByDelivery(@PathVariable Long id){
+		return tjRepository.findAllByDelivery_DeliveryId(id);
+	}
 	
 	@PostMapping
 	public ResponseEntity<Object> createTj(@RequestBody Tj tj) {

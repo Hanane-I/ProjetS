@@ -15,15 +15,15 @@ public class Tj implements Serializable {
 	private TjId id = new TjId();
 	
 	@ManyToOne
-	@MapsId("clientId")
-	@JoinColumn(name = "client_id")
-	@JsonIgnore
-	private Client client;
+	@MapsId("deliveryId")
+	@JoinColumn(name = "delivery_id")
+	@JsonProperty
+	private Delivery delivery;    // model delivery
 	
 	@ManyToOne
 	@MapsId("profilId")
 	@JoinColumn(name = "profil_id")
-	@JsonProperty
+	@JsonIgnore
 	private Profil profil;
 	
 	private double cout;
@@ -37,15 +37,16 @@ public class Tj implements Serializable {
 		this.id = id;
 	}
 
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
-
 	@JsonIgnore
+	public Delivery getDelivery() {
+		return delivery;
+	}
+
+	public void setDelivery(Delivery delivery) {
+		this.delivery = delivery;
+	}
+
+
 	public Profil getProfil() {
 		return profil;
 	}

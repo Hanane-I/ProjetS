@@ -10,11 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.*;
 
 
 @Entity
@@ -27,11 +23,9 @@ public class Ratio {
 	@ManyToOne
 	@MapsId("activiteId")
 	@JoinColumn(name = "activite_id")
-	@JsonProperty
+	@JsonIgnore
 	private Activite activite;
 
-	private int ordreAffichage;
-	
 	@ManyToOne
 	@MapsId("deliveryId")
 	@JoinColumn(name = "delivery_id")
@@ -39,6 +33,7 @@ public class Ratio {
 	private Delivery delivery;
 
 	private double pourcentage;
+	private int ordreAffichage;
 
 	public RatioId getId() {
 		return id;
@@ -49,7 +44,6 @@ public class Ratio {
 	}
 
 
-	@JsonIgnore //@JsonBackReference //
 	public Activite getActivite() {
 		return activite;
 	}
@@ -58,7 +52,7 @@ public class Ratio {
 		this.activite = activite;
 	}
 
-	 @JsonIgnore //@JsonBackReference //
+	@JsonIgnore
 	public Delivery getDelivery() {
 		return delivery;
 	}

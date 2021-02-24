@@ -29,8 +29,12 @@ public class DomaineController {
 	
 	@GetMapping("/{id}")
 	public Domaine retrieveDomaine(@PathVariable long id) {
-		Optional<Domaine> activite = domaineRepository.findById(id);
-		return activite.get();
+		return  domaineRepository.findDomaineByDomaineId(id);
+	}
+
+	@GetMapping("/categorie/{id}")
+	public List<Domaine> getAllDomaineByCategorie(@PathVariable long id){
+		return domaineRepository.findAllByCategorie_CategorieId(id);
 	}
 	
 	@PostMapping

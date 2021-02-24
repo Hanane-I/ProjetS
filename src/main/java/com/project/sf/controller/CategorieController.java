@@ -30,6 +30,9 @@ public class CategorieController {
 	public Categorie retrieveCategorie(@PathVariable long id) {
 		return categorieRepository.findCategorieByCategorieId(id);
 	}
+
+	@GetMapping("/project/{id}")
+	public  List<Categorie> getCategorieByProjectId(@PathVariable long id){return categorieRepository.findAllByProjet_ProjetId(id);}
 	
 	@PostMapping
 	public ResponseEntity<Object> createCategorie(@RequestBody Categorie categorie) {

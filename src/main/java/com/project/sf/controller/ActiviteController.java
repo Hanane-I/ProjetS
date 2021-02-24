@@ -30,7 +30,7 @@ public class ActiviteController {
 		return (List<Activite>) activiteRepository.findAll();
 	}
 
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public Activite getActiviteById(@PathVariable Long id){
 		return activiteRepository.findByActiviteId(id);
 	}

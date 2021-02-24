@@ -8,13 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/profil")
 public class ProfilController {
-
     @Autowired private ProfilRepository profilRepository;
     @Autowired private ProfilService profilService;
 
@@ -23,25 +21,25 @@ public class ProfilController {
         return profilRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Profil getProfil(@PathVariable Long id){
-        return profilRepository.findProfilByProfilId(id);
-    }
-
-
     @PostMapping
     public ResponseEntity<?> saveProfil(@RequestBody Profil profil){
         return new ResponseEntity<>(profilService.save(profil), HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteProfil(@PathVariable Long id){
+        profilRepository.deleteById(id);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProfil(@RequestBody Profil newProfil, @PathVariable Long id){
         return new ResponseEntity<>(profilService.updateProfil(newProfil, id), HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteProfil(@PathVariable Long id){
-        profilRepository.deleteById(id);
+
+
+    @GetMapping("/{id}")
+    public Profil getProfil(@PathVariable Long id){
+        return profilRepository.findProfilByProfilId(id);
     }
 }

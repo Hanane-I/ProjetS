@@ -1,14 +1,20 @@
 package com.project.sf.services;
 
+import com.project.sf.modele.Profil;
 import com.project.sf.modele.Projet;
+import com.project.sf.modele.Tj;
 import com.project.sf.repository.ProjetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjetService {
 
     @Autowired private ProjetRepository projetRepository;
+    @Autowired private  ProfilService profilService;
 
     public Projet save(Projet projet){
         Projet newProjet = new Projet();
@@ -31,4 +37,7 @@ public class ProjetService {
         projet.setDeliveries(newProjet.getDeliveries());
         return projetRepository.save(projet);
     }
+
+
+
 }

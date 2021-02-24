@@ -1,9 +1,6 @@
 package com.project.sf.modele;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.sql.rowset.serial.SerialArray;
@@ -13,6 +10,7 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","categories"})
 public class Projet implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long projetId;
@@ -20,6 +18,7 @@ public class Projet implements Serializable {
 	private String nomProjet;
 	private String commentaire;
 	private String numContrat;
+
 	@ManyToOne
 	@JoinColumn(name = "client_id")
     @JsonProperty
@@ -29,13 +28,16 @@ public class Projet implements Serializable {
 	@JsonProperty
 	private Collection<Categorie> categories = new ArrayList<Categorie>();
 
-	@OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
-	@JsonProperty
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projet", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Collection<Delivery> deliveries = new ArrayList<Delivery>();
+
+
 
 	@JsonIgnore
 	public Client getClient() { return client; }
 	public void setClient(Client client) { this.client = client; }
+
 
 	public long getProjetId() { return projetId; }
 	public void setProjetId(long projetId) { this.projetId = projetId; }
@@ -54,7 +56,6 @@ public class Projet implements Serializable {
 	public String getNumContrat() {return numContrat; }
 	public void setNumContrat(String numContrat) { this.numContrat = numContrat; }
 
-	@JsonIgnore
 	public Collection<Categorie> getCategories() {
 		return categories;
 	}
@@ -62,7 +63,7 @@ public class Projet implements Serializable {
 		this.categories = categories;
 	}
 
-	@JsonIgnore
+
 	public Collection<Delivery> getDeliveries() {
 		return deliveries;
 	}

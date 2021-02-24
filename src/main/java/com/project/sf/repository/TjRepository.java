@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import com.project.sf.modele.Tj;
 
+import java.util.List;
+
 @Repository
 public interface TjRepository extends JpaRepository<Tj, Long> {
-
+    List<Tj> findAllByDelivery_DeliveryId(Long id);
 }

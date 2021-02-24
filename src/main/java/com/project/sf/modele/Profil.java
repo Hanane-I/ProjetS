@@ -1,9 +1,12 @@
 package com.project.sf.modele;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,15 +17,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Profil implements Serializable {
+
 	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long profilId;
 	private String libelle;
-	private double cout;
-	
+
 	@OneToMany(mappedBy = "profil", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private Set<Tj> tj;
+	private Collection<Tj> tj;
 
 	public long getProfilId() {
 		return profilId;
@@ -32,11 +35,11 @@ public class Profil implements Serializable {
 		this.profilId = profilId;
 	}
 
-	public Set<Tj> getTj() {
+	public Collection<Tj> getTj() {
 		return tj;
 	}
 
-	public void setTj(Set<Tj> tj) {
+	public void setTj(Collection<Tj> tj) {
 		this.tj = tj;
 	}
 
@@ -48,13 +51,7 @@ public class Profil implements Serializable {
 		this.libelle = libelle;
 	}
 
-	public double getCout() {
-		return cout;
-	}
 
-	public void setCout(double cout) {
-		this.cout = cout;
-	}
-	
-	
+
+
 }

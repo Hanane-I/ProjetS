@@ -14,10 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","complexites"})
 public class Domaine implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long domaineId;
