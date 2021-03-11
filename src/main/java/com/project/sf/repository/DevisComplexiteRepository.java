@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DevisComplexiteRepository extends JpaRepository<DevisComplexite, Long> {
 
-    public DevisComplexite findDevisComplexiteByDevisComplexiteId(Long id);
+    DevisComplexite findDevisComplexiteByDevisComplexiteId(Long id);
 }

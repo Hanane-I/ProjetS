@@ -1,5 +1,8 @@
 package com.project.sf.modele;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,22 +19,17 @@ public class DevisComplexite {
 
     @ManyToOne
     @JoinColumn(name = "devis_complexite_item_id")
+    @JsonIgnore
     private DevisComplexiteItem devisComplexiteItem;
 
     private Long domaineId;
     private String domaineName;
-    private String domaineDesciption;
+    private String domaineDescription;
 
     //info categorie
     private Long categorieId;
     private String categorieName;
     private String categorieDescription;
-
-    //info complexite
-    private long complexiteId;
-    private String complexiteNom;
-    private String complexiteLibelle;
-    private double complexiteValeur;
 
 
     public DevisComplexiteItem getDevisComplexiteItem() {
@@ -51,11 +49,11 @@ public class DevisComplexite {
     }
 
     public String getDomaineDesciption() {
-        return domaineDesciption;
+        return domaineDescription;
     }
 
     public void setDomaineDesciption(String domaineDesciption) {
-        this.domaineDesciption = domaineDesciption;
+        this.domaineDescription = domaineDesciption;
     }
 
     public Long getCategorieId() {
@@ -80,38 +78,6 @@ public class DevisComplexite {
 
     public void setCategorieDescription(String categorieDescription) {
         this.categorieDescription = categorieDescription;
-    }
-
-    public long getComplexiteId() {
-        return complexiteId;
-    }
-
-    public void setComplexiteId(long complexiteId) {
-        this.complexiteId = complexiteId;
-    }
-
-    public String getComplexiteNom() {
-        return complexiteNom;
-    }
-
-    public void setComplexiteNom(String complexiteNom) {
-        this.complexiteNom = complexiteNom;
-    }
-
-    public String getComplexiteLibelle() {
-        return complexiteLibelle;
-    }
-
-    public void setComplexiteLibelle(String complexiteLibelle) {
-        this.complexiteLibelle = complexiteLibelle;
-    }
-
-    public double getComplexiteValeur() {
-        return complexiteValeur;
-    }
-
-    public void setComplexiteValeur(double complexiteValeur) {
-        this.complexiteValeur = complexiteValeur;
     }
 
     public long getDevisComplexiteId() {

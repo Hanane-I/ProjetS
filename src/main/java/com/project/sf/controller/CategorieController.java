@@ -14,6 +14,7 @@ import com.project.sf.modele.Categorie;
 import com.project.sf.repository.CategorieRepository;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/categorie")
 public class CategorieController {
 

@@ -22,12 +22,11 @@ import com.project.sf.repository.ActiviteRepository;
 public class ActiviteController {
 	
 	@Autowired private ActiviteRepository activiteRepository;
-	@Autowired private RatioRepository ratioRepository;
 	@Autowired private ActiviteService activiteService;
 	
 	@GetMapping
 	public List<Activite> getAllActivite() {
-		return (List<Activite>) activiteRepository.findAll();
+		return activiteRepository.findAll();
 	}
 
 	@GetMapping("/{id}")
@@ -49,18 +48,4 @@ public class ActiviteController {
 	public ResponseEntity<?> updateActivite(@RequestBody Activite activite, @PathVariable Long id){
 		return new ResponseEntity<>(activiteService.updateActivite(activite, id), HttpStatus.ACCEPTED);
 	}
-
-	/*
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> updateActivite(@RequestBody Activite activite, @PathVariable Long id){
-		return new ResponseEntity<>(activiteService.updateActivite(activite, id), HttpStatus.ACCEPTED);
-	}
-	@DeleteMapping("/{id}/ratio/{idr}")
-	@Transactional
-	public void deleteActiviteRatio(@PathVariable Long id, @PathVariable int idr){
-		Activite activite = activiteService.findActiviteById(id);
-		activiteService.deleteRatioActivite(activite, idr);
-	}*/
-
-	
 }

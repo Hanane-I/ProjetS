@@ -16,6 +16,7 @@ import com.project.sf.modele.Domaine;
 import com.project.sf.repository.DomaineRepository;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/domaine")
 public class DomaineController {
 	

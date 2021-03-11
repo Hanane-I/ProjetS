@@ -14,6 +14,7 @@ import com.project.sf.modele.Projet;
 import com.project.sf.repository.ProjetRepository;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/projet")
 public class ProjetController {
 

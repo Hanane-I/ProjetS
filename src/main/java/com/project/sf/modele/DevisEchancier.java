@@ -9,15 +9,13 @@ public class DevisEchancier {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long devisEchancierId;
 
-    private Long etapeEchancierId;
-    private Long deliveryId;
-
-
     //info delivery
-    private String deliveryDom;
+    private Long deliveryId;
+    private String deliveryNom;
     private String deliveryLibelle;
 
     //info etape echancier
+    private Long etapeEchancierId;
     private String etapeEchancierEtape;
 
 
@@ -29,12 +27,12 @@ public class DevisEchancier {
     private DevisEchancierItem devisEchancierItem;
 
 
-    public String getDeliveryDom() {
-        return deliveryDom;
+    public String getDeliveryNom() {
+        return deliveryNom;
     }
 
-    public void setDeliveryDom(String deliveryDom) {
-        this.deliveryDom = deliveryDom;
+    public void setDeliveryNom(String deliveryNom) {
+        this.deliveryNom = deliveryNom;
     }
 
     public String getDeliveryLibelle() {

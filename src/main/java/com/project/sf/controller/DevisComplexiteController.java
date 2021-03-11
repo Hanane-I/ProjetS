@@ -11,26 +11,25 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@CrossOrigin
 @RequestMapping("/api/devisComplexite")
 public class DevisComplexiteController {
 
     @Autowired private DevisComplexiteRepository devisComplexiteRepository;
     @Autowired private DevisComplexiteService devisComplexiteService;
 
-    //get
+
     @GetMapping
     public List<DevisComplexite> getListDevisComplexite(){
         return devisComplexiteRepository.findAll();
     }
 
-    //get id
     @GetMapping("/{id}")
     public DevisComplexite getDevisComplexite(@PathVariable Long id){
         return devisComplexiteRepository.findDevisComplexiteByDevisComplexiteId(id);
     }
 
-    //post
     @PostMapping
     public ResponseEntity<?> save(@RequestBody DevisComplexite devisComplexite){
         return new ResponseEntity<>(devisComplexiteService.save(devisComplexite), HttpStatus.ACCEPTED);

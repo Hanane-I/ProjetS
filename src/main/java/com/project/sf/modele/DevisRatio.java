@@ -12,22 +12,19 @@ public class DevisRatio {
     private long devisRatioId;
 
     private Long activiteId;
-
-    private Long deliveryId;
-
-    private double pourcentage;
-    private int ordreAffichage;
-    private Date date;
-
     //info activite
     private String activiteLibelle;
     private String activiteIdCourt;
     private String activiteIdLong;
 
-
+    private Long deliveryId;
     //info delivery
     private String deliveryNom;
     private String deliveryLibelle;
+
+    private double pourcentage;
+    private int ordreAffichage;
+    private Date date;
 
 
     @ManyToOne
@@ -80,5 +77,53 @@ public class DevisRatio {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getActiviteLibelle() {
+        return activiteLibelle;
+    }
+
+    public void setActiviteLibelle(String activiteLibelle) {
+        this.activiteLibelle = activiteLibelle;
+    }
+
+    public String getActiviteIdCourt() {
+        return activiteIdCourt;
+    }
+
+    public void setActiviteIdCourt(String activiteIdCourt) {
+        this.activiteIdCourt = activiteIdCourt;
+    }
+
+    public String getActiviteIdLong() {
+        return activiteIdLong;
+    }
+
+    public void setActiviteIdLong(String activiteIdLong) {
+        this.activiteIdLong = activiteIdLong;
+    }
+
+    public String getDeliveryNom() {
+        return deliveryNom;
+    }
+
+    public void setDeliveryNom(String deliveryNom) {
+        this.deliveryNom = deliveryNom;
+    }
+
+    public String getDeliveryLibelle() {
+        return deliveryLibelle;
+    }
+
+    public void setDeliveryLibelle(String deliveryLibelle) {
+        this.deliveryLibelle = deliveryLibelle;
+    }
+
+    public DevisRatioItem getDevisRatioItem() {
+        return devisRatioItem;
+    }
+
+    public void setDevisRatioItem(DevisRatioItem devisRatioItem) {
+        this.devisRatioItem = devisRatioItem;
     }
 }

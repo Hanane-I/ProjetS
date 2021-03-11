@@ -1,5 +1,6 @@
 package com.project.sf.modele;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -19,12 +20,18 @@ public class DevisProjet {
     private String numContrat;
     //private Date date;
 
-    @OneToOne( mappedBy = "devisProjet" )
+    @OneToOne( fetch = FetchType.LAZY, mappedBy = "devisProjet")
+    @JsonIgnore
     private Devis devis;
 
     //info client
     private Long clientId;
     private String clientNom;
+    private String siret;
+    private String refClient;
+    private String identTva;
+    private String adresse;
+    private String telephone;
 
 
     //info categories
@@ -32,7 +39,7 @@ public class DevisProjet {
     private String categorieNom;
     private String categorieLibelle;
 
-
+    @JsonIgnore
     public Devis getDevis() {
         return devis;
     }
@@ -112,5 +119,45 @@ public class DevisProjet {
 
     public void setClientId(Long clientId) {
         this.clientId = clientId;
+    }
+
+    public String getSiret() {
+        return siret;
+    }
+
+    public void setSiret(String siret) {
+        this.siret = siret;
+    }
+
+    public String getRefClient() {
+        return refClient;
+    }
+
+    public void setRefClient(String refClient) {
+        this.refClient = refClient;
+    }
+
+    public String getIdentTva() {
+        return identTva;
+    }
+
+    public void setIdentTva(String identTva) {
+        this.identTva = identTva;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 }

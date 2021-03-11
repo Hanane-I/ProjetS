@@ -17,7 +17,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
+@CrossOrigin
 @RequestMapping("/api/devisRatioItem")
 public class DevisRatioItemController {
 

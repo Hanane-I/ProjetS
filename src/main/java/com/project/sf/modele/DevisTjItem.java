@@ -1,5 +1,6 @@
 package com.project.sf.modele;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ public class DevisTjItem {
 
     @ManyToOne
     @JoinColumn(name = "devis_item_id")
-    @JsonProperty
+    @JsonIgnore
     private DevisItem devisItem;
 
     public long getDevisTjItemId() {

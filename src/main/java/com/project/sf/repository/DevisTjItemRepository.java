@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DevisTjItemRepository extends JpaRepository<DevisTjItem, Long> {
 
-    public DevisTjItem findByDevisTjItemId(Long id);
+     DevisTjItem findByDevisTjItemId(Long id);
 }

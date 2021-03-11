@@ -1,5 +1,7 @@
 package com.project.sf.modele;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -68,4 +70,5 @@ public class Devis {
     public void setDevisItems(Collection<DevisItem> devisItems) {
         this.devisItems = devisItems;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.project.sf.modele;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -17,21 +18,25 @@ public class DevisItem {
 
     @ManyToOne
     @JoinColumn(name = "devis_id")
-    @JsonProperty
+    @JsonIgnore
     private Devis devis;
 
     //ensemble de devisComp
     @OneToMany( mappedBy = "devisItem", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Collection<DevisComplexiteItem> devisComplexiteItems = new ArrayList<DevisComplexiteItem>();
 
     @OneToMany( mappedBy = "devisItem", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Collection<DevisRatioItem> devisRatioItems = new ArrayList<DevisRatioItem>();
 
     @OneToMany( mappedBy = "devisItem", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Collection<DevisTjItem> devisTjItems = new ArrayList<DevisTjItem>();
 
 
     @OneToMany( mappedBy = "devisItem", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Collection<DevisEchancierItem> devisEchancierItems = new ArrayList<DevisEchancierItem>();
 
 
@@ -67,6 +72,7 @@ public class DevisItem {
         this.devisEchancierItems = devisEchancierItems;
     }
 
+    @JsonIgnore
     public Devis getDevis() {
         return devis;
     }

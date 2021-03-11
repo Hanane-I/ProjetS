@@ -14,6 +14,7 @@ import com.project.sf.modele.Tj;
 import com.project.sf.repository.TjRepository;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/tj")
 public class TjController {
 	@Autowired
